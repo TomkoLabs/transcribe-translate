@@ -1,0 +1,31 @@
+# Relative folders are resolved against the installation directory.
+source_folder = "Video Source"
+output_folder = "Transcribed"
+work_folder = "Work"
+# models_folder = "Models" # Default; set for an explicit external/shared directory.
+source_language = "auto"
+target_language = "en"
+# ASR settings affect local source recognition. Native translation shares this
+# model; API translation instead uses the saved source text.
+asr_model = "large-v3"
+asr_device = "auto"
+asr_compute_type = "auto"
+
+[translation]
+backend = "local" # Exactly "local" (native speech-to-English) or "api" (text).
+# For a separate, complete API configuration, copy config.api.example.toml to
+# ignored config.api.local.toml and use --config config.api.local.toml.
+# This avoids duplicate [translation] tables and preserves this local config.
+# The settings below are used only with backend = "api".
+# Set these here or use TT_TRANSLATION_BASE_URL / TT_TRANSLATION_MODEL.
+# The base URL includes the API prefix (commonly /v1).
+base_url = ""
+model = ""
+# For a key-free API server, set api_key_env = "". Local mode never reads this key.
+api_key_env = "TT_TRANSLATION_API_KEY"
+# A literal api_key is also accepted ONLY in ignored config.local.toml.
+# Advanced bounds; normally keep the defaults.
+timeout_seconds = 180
+chunk_chars = 1200
+context_chars = 160
+attempts = 3

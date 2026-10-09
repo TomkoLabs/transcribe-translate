@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SCRIPT="$(readlink -f -- "${BASH_SOURCE[0]}")"
+ROOT="$(cd -P -- "$(dirname -- "$SCRIPT")" && pwd)"
+PYTHON="$ROOT/.venv/bin/python"
+if [[ ! -x "$PYTHON" || -L "$ROOT/.venv" ]]; then
+    printf 'Run setup to repair this installation: %s/setup.sh\n' "$ROOT" >&2
+    exit 2
+fi
+# Hold before Python starts importing packages; setup uses an exclusive root lock.
+exec {TT_RUNTIME_FD}<"$ROOT"
+if ! flock --shared --nonblock "$TT_RUNTIME_FD"; then
+    echo 'Setup is using this installation; wait for it to finish.' >&2
+    exit 2
+fi
+export TT_ROOT="$ROOT"
+export HF_HUB_DISABLE_TELEMETRY=1
+export DO_NOT_TRACK=1
+exec "$PYTHON" -I -B "$ROOT/scripts/run.py" "$@"

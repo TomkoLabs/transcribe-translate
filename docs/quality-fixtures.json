@@ -1,0 +1,104 @@
+{
+  "dataset": "google/fleurs",
+  "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+  "subset": "cmn_hans_cn",
+  "split": "dev",
+  "license": "CC-BY-4.0",
+  "sample_rate": 16000,
+  "fixtures": [
+    {
+      "filename": "10116334326946811387.wav",
+      "id": 1579,
+      "samples": 294080,
+      "sha256": "f3e12a114bedbc867e06bfb7aceb2721701aa729685b9e4be39f2b98305b72ab",
+      "reference_sha256": "9c878587496b53ea0cd2f585c572547e4995ef5f4a0d6024feda65531aef4aa9"
+    },
+    {
+      "filename": "10149760684641961155.wav",
+      "id": 1605,
+      "samples": 119040,
+      "sha256": "577a635c2261680c61dda5fecbc4f83bff6f37f453665b8d9d1a68f210f57c0a",
+      "reference_sha256": "514a037e3e4c6bf7e1b666d7c4c048d2bd675dbe264a4ad077ffc2146be4d678"
+    },
+    {
+      "filename": "11788433184081135999.wav",
+      "id": 1520,
+      "samples": 244800,
+      "sha256": "ef0931ac266bccb75ec5e4fb9232030785c9f5e0b530bdc11aa269e16bb491a2",
+      "reference_sha256": "0edce717c43a18e705012dec8af4c3a454824696b6e9d64740cb159b379149a2"
+    },
+    {
+      "filename": "5632101909291921840.wav",
+      "id": 1637,
+      "samples": 388800,
+      "sha256": "ad0da4e6be48448028a9709dd9253806f89217d339dbf51e892a57143becb955",
+      "reference_sha256": "6909ac4ff94fc95335e4ad69a01378225a0a0fd94f3d3eec38c05b05bc126a3e"
+    },
+    {
+      "filename": "6853906816602258944.wav",
+      "id": 1604,
+      "samples": 433920,
+      "sha256": "5ae85ad8afacd0752f93a83217cfb8d216265f6bde8c2be10bfa737b74ab6f37",
+      "reference_sha256": "a3ed3a45a89dd3e79e2fe3152757b10c5cf26a21dd6571a9f29f8fa13435e561"
+    }
+  ],
+  "long_compilation": {
+    "filenames": [
+      "6853906816602258944.wav",
+      "5632101909291921840.wav",
+      "11788433184081135999.wav"
+    ],
+    "construction": "Concatenate decoded mono PCM16 samples in listed order, without trimming, filtering, gaps or repeated clips. Three separate human reads, not one natural continuous talk.",
+    "sample_count": 1067520,
+    "duration_seconds": 66.72,
+    "pcm_sha256": "3ba703f5a9b7fa5c2b02dd3564ee2cdde02852239978be15758bb9155755a947"
+  },
+  "inference": {
+    "model": "large-v3",
+    "revision": "edaa852ec7e145841d8ffdb056a99866b5f0a478",
+    "device": "cpu",
+    "compute_type": "int8",
+    "source_language": "zh",
+    "beam_size": 5,
+    "vad_filter": false,
+    "condition_on_previous_text": true,
+    "native_without_timestamps": true,
+    "api_chunk_chars": 120,
+    "api_context_chars": 160
+  },
+  "notes": "Read raw references from pinned dev.tsv by exact filename. Original binaries, reference text and complete generated outputs are not bundled. Hardware and model judgments are bounded; see QUALITY.md.",
+  "diagnostic_controls": [
+    {
+      "audio": "10149760684641961155.wav",
+      "device": "cpu",
+      "compute_type": "int8",
+      "task": "translate",
+      "purpose": "Direct library bypass of application"
+    },
+    {
+      "audio": [
+        "10116334326946811387.wav",
+        "10149760684641961155.wav"
+      ],
+      "device": "cpu",
+      "compute_type": "float32",
+      "task": "translate",
+      "purpose": "One-factor numerical precision control"
+    },
+    {
+      "audio": "10149760684641961155.wav",
+      "device": "cpu",
+      "compute_type": "float32",
+      "task": "transcribe",
+      "purpose": "Separate source recognition under same precision control"
+    },
+    {
+      "audio": "long_compilation",
+      "device": "cpu",
+      "compute_type": "int8",
+      "task": "translate",
+      "condition_on_previous_text": false,
+      "purpose": "Preselected one-factor control for observed previous-topic carryover"
+    }
+  ]
+}

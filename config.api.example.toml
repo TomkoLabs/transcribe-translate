@@ -1,0 +1,34 @@
+# Copy to config.api.local.toml, edit the placeholders, then run:
+# ./transcribe-translate --config config.api.local.toml --api-models
+# ./transcribe-translate --config config.api.local.toml --api-check
+# ./transcribe-translate --config config.api.local.toml
+# Ordinary ./transcribe-translate still uses config.local.toml.
+# Relative folders use the installation directory, even with --config.
+source_folder = "Video Source"
+output_folder = "Transcribed"
+work_folder = "Work"
+# models_folder = "Models" # Default; set for an explicit external/shared directory.
+source_language = "auto" # For known French speech, use "fr".
+target_language = "en"
+
+# These settings affect source ASR on this machine; no audio goes to the gateway.
+asr_model = "large-v3"
+asr_device = "auto"
+asr_compute_type = "auto"
+
+# This single table configures translation of the saved source TEXT and context.
+# The deployment machine must reach the gateway. Obtain an authorized gateway
+# key and client URL from its operator; never put a credential in this example.
+[translation]
+backend = "api"
+base_url = "http://gateway.example:4000/v1" # API prefix, not an operation URL.
+model = "exact-exposed-alias" # Copy an accessible ID from --api-models.
+api_key_env = "TT_TRANSLATION_API_KEY"
+timeout_seconds = 180 # 1..600; allow cold loading/reasoning for your endpoint.
+chunk_chars = 1200 # 50..2000; bound text per request, not audio windows.
+context_chars = 160 # 0..300; neighbors aid interpretation, not repeated content.
+attempts = 3 # Transient failures only; bad answers/authentication fail clearly.
+# Requests retain the endpoint's sampling/reasoning/output defaults. Ensure its
+# output budget includes reasoning AND the complete translated JSON answer.
+# --api-check proves bounded connectivity/format, not audio fidelity acceptance.
+# API failures preserve source/checkpoints and never switch silently to local.

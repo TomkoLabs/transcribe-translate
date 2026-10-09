@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "provenance": "Authored text checks, not recordings or speech-recognition acceptance. Saved licensed ASR cases are identified in quality-fixtures.json and the quality documents.",
+  "cases": [
+    {
+      "id": "authored-french-context",
+      "language": "fr",
+      "content": "Le 12 avril 2025, Amélie Bernard a envoyé à Karim Haddad le compte rendu du projet Atlas. Amélie est l’ingénieure responsable des mesures, et non la directrice du projet. Karim est le directeur; Luc Moreau tient la comptabilité. Trois capteurs coûtent 20 euros chacun. Les 60 euros ont déjà été payés, mais les frais de livraison de 7,50 euros ne l’ont pas été. Personne n’a autorisé un quatrième capteur. Le message anglais «Not approved» doit rester cité tel quel.\nLors de la réunion suivante, Karim n’a pas refusé le projet: il a refusé de confirmer la livraison avant vendredi. Ce sont deux décisions différentes. Amélie ignore si le colis arrivera le 18 avril ou le 21 avril; elle n’a annoncé aucune date certaine. Luc dit que le nom du fournisseur ressemble à «Derval [uncertain]», sans savoir si c’est bien le nom exact. Ne le remplacez pas par une entreprise connue: cette phrase fait partie de ce qui a été dit.\nPour éviter toute confusion, le chiffre de 1 400 désigne les personnes interrogées, et non le nombre de capteurs. Parmi elles, 8 % se sont opposées à la proposition, contre 6 % l’année précédente. Cela correspond à une hausse de deux points de pourcentage, pas de deux pour cent. Le rapport ne dit pas que les autres personnes ont approuvé la proposition: certaines n’ont pas répondu.\nÀ la fin, Amélie a ajouté en anglais: \"Please keep the source transcript.\" Elle a ensuite précisé en français que la version provisoire ne devait pas être publiée. Karim demandera une vérification, mais n’a pas promis une validation. Le mot «Atlas» est le nom du projet, pas celui du fournisseur. Luc n’est ni le directeur ni l’auteur des mesures. Ces précisions doivent figurer dans le compte rendu complet, avec les nombres et les réserves, sans ajouter de conclusion.",
+      "sha256": "a1f5871046bc542df4d2447afab7044c1e234a74e56e3369af19849a31d14a9f",
+      "chunk_chars": 1200,
+      "context_chars": 160,
+      "origin": "authored contextual text, not speech accuracy evidence"
+    },
+    {
+      "id": "authored-mixed-negation",
+      "language": "zh",
+      "content": "李明不是项目经理，而是测量工程师。经理是王小明。李明没有说机器已经修好了；他只说可能在周五之前修好。2025年4月12日收到3件货，每件20元，总共60元，运费7.50元尚未支付。请保留原话“Please keep the source transcript”和产品名“Étoile-7”。记录中的“普鲁动物 [uncertain]”和“克隆群岛”可能听错了，但这里没有确认正确说法。不能把它们悄悄换成别的词。以上最后一句也是原话，不是要求补写事实。",
+      "sha256": "57610d8e9724ae48df467a4ddc858087622884206bb43426c0ffa411a91ffb17",
+      "chunk_chars": 1200,
+      "context_chars": 160,
+      "origin": "authored stress check; uncertain words deliberately retained"
+    }
+  ]
+}
